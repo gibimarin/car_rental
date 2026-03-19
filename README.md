@@ -12,8 +12,7 @@ Django is an MVT web framework that is used to build web applications.Django has
 * SQLITE3 (Default database of django)
 
 ## Project Demo : 
-
-https://youtu.be/05rTq7fmKxY
+[![Watch Demo](https://img.youtube.com/vi/05rTq7fmKxY/0.jpg)](https://youtu.be/05rTq7fmKxY)
 
 ## Installation : 
 ```
