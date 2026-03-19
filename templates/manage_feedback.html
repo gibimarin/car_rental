@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Feedback{% endblock title %}
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Manage User Feedback and Complaints</h2>
+    
+    {% if feedback_list %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in feedback_list %}
+                <tr>
+                    <td>{{ item.user.username }}</td>
+                    <td>{{ item.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ item.get_feedback_type_display }}</td>
+                    <td>{{ item.subject }}</td>
+                    <td>
+                        {% if item.status == 'New' %}
+                            <span class="badge badge-primary">{{ item.status }}</span>
+                        {% elif item.status == 'In Progress' %}
+                            <span class="badge badge-warning">{{ item.status }}</span>
+                        {% elif item.status == 'Resolved' %}
+                            <span class="badge badge-success">{{ item.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="POST" class="form-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="feedback_id" value="{{ item.id }}">
+                            <select name="status" class="form-control form-control-sm mr-2">
+                                <option value="New" {% if item.status == 'New' %}selected{% endif %}>New</option>
+                                <option value="In Progress" {% if item.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                <option value="Resolved" {% if item.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-info">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center">There is no feedback to display at the moment.</p>
+    {% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">User Reviews</h2>
+    <div class="row">
+        {% for review in reviews %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.user.first_name }} ({{ review.user.username }})</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Rating: {{ review.rating }}/5</h6>
+                    <p class="card-text">{{ review.content }}</p>
+                    <p class="text-muted small">Submitted on {{ review.created_at|date:"M d, Y H:i" }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No reviews yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
