@@ -15,7 +15,7 @@ Django is an MVT web framework that is used to build web applications.Django has
 
 
 
-https://user-images.githubusercontent.com/89544124/180066688-a8265b4c-d72c-46b7-985c-c1eb60456f33.mp4
+
 
 
 ## Installation : 
